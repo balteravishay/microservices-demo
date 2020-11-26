@@ -1,5 +1,8 @@
 # Spring properties
 spring:
+  cloud:
+    client:
+      hostname: spring-microservice-accounts.azurewebsites.net
   application:
      name: accounts-service  # Service registers under this name
   freemarker:
@@ -13,7 +16,7 @@ spring:
 error.path: /error
 
 # HTTP Server
-server.port: 2222   # HTTP (Tomcat) port
+server.port: 80   # HTTP (Tomcat) port
 
 # Discovery Server Access
 #  1. DEV ONLY: Reduce the lease renewal interval to speed up registration
@@ -21,8 +24,9 @@ server.port: 2222   # HTTP (Tomcat) port
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://${registration.server.hostname}:1111/eureka/
+      defaultZone: https://${registration.server.hostname}/eureka/
   instance:
+    hostname: spring-microservice-accounts.azurewebsites.net
     leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
 
 #  3. If using the Angel release-train ONLY, give the process a unique instance id 

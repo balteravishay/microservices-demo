@@ -1,0 +1,6 @@
+FROM openjdk:8-jre
+ARG registration_server_hostname
+ENV registration_server_hostname_var=$registration_server_hostname
+ADD target/microservices-demo-2.0.0.RELEASE.jar app.jar
+EXPOSE 80
+ENTRYPOINT ["java","-jar","/app.jar","accounts", "--registration.server.hostname=${registration_server_hostname_var}"]

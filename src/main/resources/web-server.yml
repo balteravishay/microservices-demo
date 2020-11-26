@@ -5,6 +5,9 @@ spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSo
 
 # Spring properties
 spring:
+  cloud:
+    client:
+      hostname: spring-microservice-web.azurewebsites.net
   application:
     name: web-service  # Identify this application
   freemarker:
@@ -18,7 +21,7 @@ spring:
 error.path: /error
 
 # HTTP Server
-server.port: 3333   # HTTP (Tomcat) port
+server.port: 80   # HTTP (Tomcat) port
 
 # Discovery Server Access
 #  1. DEV ONLY: Reduce the lease renewal interval to speed up registration
@@ -26,8 +29,9 @@ server.port: 3333   # HTTP (Tomcat) port
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://${registration.server.hostname}:1111/eureka/
+      defaultZone: https://${registration.server.hostname}/eureka/
   instance:
+    hostname: spring-microservice-web.azurewebsites.net
     leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
 
 # Enable actuator access without security checks - DEVELOPEMENT ONLY
